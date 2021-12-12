@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 const url =
-  "";
+  "mongodb+srv://leeoandradee:BttT3RUtcAMtjYf@clusteruser.zrz7c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -57,23 +57,40 @@ app.post(
       ownerName: tokenData.name,
       creditCardLimit: req.body.creditCardLimit,
     });
-
-    account
-      .save()
-      .then((success) => {
-        res
-          .status(201)
-          .send({ output: `Nova conta cadastrada`, payload: success });
-      })
-      .catch((error) => {
-        console.log(error);
-        if ( error && error.code === 11000 ) {
-          res.status(400).send({ output: `A conta do banco ${req.body.bankName} já foi cadastrada` });
-          
-          return;
+    Account.findOne(
+      { username: tokenData.user, bankName: req.body.bankName },
+      (error, bankAccount) => {
+        if (error) {
+          return res
+            .status(500)
+            .send({ output: `Erro ao tentar localizar a conta do banco` });
         }
-        res.status(500).send({ output: `Cadastro não realizado` });
-      });
+        if (bankAccount) {
+          return res.status(400).send({
+            output: `Conta do banco ${req.body.bankName} já foi cadastrada.`,
+          });
+        }
+
+        account
+          .save()
+          .then((success) => {
+            res
+              .status(201)
+              .send({ output: `Nova conta cadastrada`, payload: success });
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error && error.code === 11000) {
+              res.status(400).send({
+                output: `A conta do banco ${req.body.bankName} já foi cadastrada`,
+              });
+
+              return;
+            }
+            res.status(500).send({ output: `Cadastro não realizado` });
+          });
+      }
+    );
   }
 );
 
@@ -107,7 +124,7 @@ app.put(
     Account.findOneAndUpdate(
       { username: tokenData.user, bankName: req.body.bankName },
       accountUpdate,
-      {new: true},
+      { new: true },
       (error, data) => {
         if (error) {
           console.error(error);
