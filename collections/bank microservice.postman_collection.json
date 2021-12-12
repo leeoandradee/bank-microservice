@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "b4b3ea88-2163-4794-95e6-ed606aa72f9b",
+		"name": "bank microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create bank account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjNhZGQ3ZTk0NTQ4ZDlkNjMyZDU1OSIsInVzZXIiOiJyb2dlciIsIm5hbWUiOiJSb2dlciBUZXhlaXJhIiwiaWF0IjoxNjM5MzIxMTU3LCJleHAiOjE2Mzk3NTMxNTd9.2FcKghsNZuWZFQUov0TUSvuC0M1WkeyHEyanBAlZNxg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bankName\": \"Itau\",\r\n    \"accountType\": \"PF\",\r\n    \"creditCardLimit\": 100000000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/bank",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bank"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get bank accounts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjYwOGJiYzk5Yjk4MDljMzFlOGE0YSIsInVzZXIiOiJtYXRoZXVzIiwibmFtZSI6IlJvZ2VyIFRleGVpcmEiLCJpYXQiOjE2MzkzMTk3NjMsImV4cCI6MTYzOTc1MTc2M30.1HnWikVVCKMWQEXz_BoE9iYXKzQbAtdgGo-PVF8IBEQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/bank",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bank"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update bank account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjYwOGJiYzk5Yjk4MDljMzFlOGE0YSIsInVzZXIiOiJtYXRoZXVzIiwibmFtZSI6IlJvZ2VyIFRleGVpcmEiLCJpYXQiOjE2MzkzMTk3NjMsImV4cCI6MTYzOTc1MTc2M30.1HnWikVVCKMWQEXz_BoE9iYXKzQbAtdgGo-PVF8IBEQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bankName\": \"Itau\",\r\n    \"accountType\": \"PJ\",\r\n    \"creditCardLimit\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/bank",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bank"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
